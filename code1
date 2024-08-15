@@ -1,0 +1,114 @@
+% (C)(R) 2024 All Copyrights Reserved Constantinos Challoumis
+% Set global figure and axes background to white
+set(0, 'DefaultFigureColor', 'white');
+set(0, 'DefaultAxesColor', 'white');
+
+% Parameters
+GDP = 1000;                   % Total GDP
+total_savings = 300;          % Total savings in the economy
+enforcement_savings_ratio = 0.7; % Percentage of savings as enforcement savings
+escape_savings_ratio = 1 - enforcement_savings_ratio; % Percentage of savings as escape savings
+
+% Calculate enforcement and escape savings
+enforcement_savings = total_savings * enforcement_savings_ratio;
+escape_savings = total_savings * escape_savings_ratio;
+
+% Money cycle indices (hypothetical values)
+high_index_money_cycle = 0.94; % Efficiency of the money cycle for enforcement savings
+general_index_money_cycle = 0.94;
+
+% Economic impact of enforcement vs escape savings
+% Assuming enforcement savings contribute positively to GDP while escape savings do not
+GDP_enhanced_by_enforcement = GDP * (1 + high_index_money_cycle * enforcement_savings_ratio);
+GDP_reduced_by_escape = GDP * (1 - escape_savings_ratio);
+
+% Net GDP after considering savings
+net_GDP = GDP_enhanced_by_enforcement + GDP_reduced_by_escape - GDP;
+
+% Results
+fprintf('Enforcement Savings: $%.2f\n', enforcement_savings);
+fprintf('Escape Savings: $%.2f\n', escape_savings);
+fprintf('GDP Enhanced by Enforcement Savings: $%.2f\n', GDP_enhanced_by_enforcement);
+fprintf('GDP Reduced by Escape Savings: $%.2f\n', GDP_reduced_by_escape);
+fprintf('Net GDP Impact: $%.2f\n', net_GDP);
+
+% Plot 1: Enforcement vs Escape Savings (Bar Chart)
+figure;
+bar([enforcement_savings, escape_savings]);
+title('Plot 1: Enforcement vs Escape Savings');
+ylabel('Amount ($)');
+set(gca, 'XTickLabel', {'Enforcement Savings', 'Escape Savings'});
+set(gca, 'FontSize', 12);
+disp('Displaying Plot 1: Enforcement vs Escape Savings');
+
+% Pause and clear for the next plot
+pause(2);
+clf;
+
+% Plot 2: GDP Impact (Bar Chart)
+figure;
+bar([GDP, GDP_enhanced_by_enforcement, GDP_reduced_by_escape, net_GDP]);
+title('Plot 2: GDP Impact');
+ylabel('GDP ($)');
+set(gca, 'XTick', 1:4, 'XTickLabel', {'GDP', 'Enforcement Savings', 'Escape Savings', 'Net Impact'});
+set(gca, 'FontSize', 12);
+set(gca, 'XTickLabelRotation', 45);
+set(gca, 'Position', [0.1, 0.2, 0.8, 0.7]);
+xlim([0.5, 4.5]);
+disp('Displaying Plot 2: GDP Impact');
+
+% Pause and clear for the next plot
+pause(2);
+clf;
+
+% Plot 3: Savings Ratios (Pie Chart)
+figure;
+pie([enforcement_savings_ratio, escape_savings_ratio], {'Enforcement Savings', 'Escape Savings'});
+title('Plot 3: Savings Ratios');
+set(gca, 'FontSize', 12);
+disp('Displaying Plot 3: Savings Ratios');
+
+% Pause and clear for the next plot
+pause(2);
+clf;
+
+% Plot 4: Money Cycle Indices (Bar Chart)
+figure;
+bar([high_index_money_cycle, general_index_money_cycle]);
+title('Plot 4: Money Cycle Indices');
+ylabel('Index Value');
+set(gca, 'XTickLabel', {'High Index', 'General Index'});
+set(gca, 'FontSize', 12);
+disp('Displaying Plot 4: Money Cycle Indices');
+
+% Pause and clear for the next plot
+pause(2);
+clf;
+
+% Plot 5: 2D Line Plot for GDP Impact
+figure;
+x = [1, 2, 3, 4]; % x-axis points
+y = [GDP, GDP_enhanced_by_enforcement, GDP_reduced_by_escape, net_GDP]; % y-axis values
+plot(x, y, '-o', 'LineWidth', 2); % 2D line plot
+title('Plot 5: GDP Impact (2D Line Plot)');
+xlabel('Scenario');
+ylabel('GDP ($)');
+set(gca, 'XTick', x, 'XTickLabel', {'Initial GDP', 'Enhanced', 'Reduced', 'Net Impact'});
+set(gca, 'FontSize', 12);
+disp('Displaying Plot 5: GDP Impact (2D Line Plot)');
+
+% Pause and clear for the next plot
+pause(2);
+clf;
+
+% Plot 6: 3D Line Plot for Savings and GDP Impact
+figure;
+z = [GDP, GDP_enhanced_by_enforcement, GDP_reduced_by_escape, net_GDP];
+plot3(x, [enforcement_savings, enforcement_savings, escape_savings, escape_savings], z, '-o', 'LineWidth', 2);
+title('Plot 6: Savings and GDP Impact (3D Line Plot)');
+xlabel('Scenario');
+ylabel('Savings ($)');
+zlabel('GDP ($)');
+grid on;
+set(gca, 'FontSize', 12);
+disp('Displaying Plot 6: Savings and GDP Impact (3D Line Plot)');
