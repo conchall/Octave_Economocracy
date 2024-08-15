@@ -1,4 +1,4 @@
-% (C)(R) 2024 All Copyrights Reserved Constantinos Challoumis
+% (C)(R) 2024 All Rights Reserved Constantinos Challoumis
 % Set global figure and axes background to white
 set(0, 'DefaultFigureColor', 'white');
 set(0, 'DefaultAxesColor', 'white');
